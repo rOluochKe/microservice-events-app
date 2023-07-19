@@ -1,0 +1,6 @@
+docker build -t iamraymond/auth .
+
+skaffold dev
+
+C:\Windows\System32\Drivers\etc\hosts
+127.0.0.1 tikiti.dev
