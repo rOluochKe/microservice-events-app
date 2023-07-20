@@ -4,3 +4,6 @@ skaffold dev
 
 C:\Windows\System32\Drivers\etc\hosts
 127.0.0.1 tikiti.dev
+
+Creating a secret
+kubectl create secret generic jwt-secret --from-literal=JWT_KEY=eteti454oi6i4@!36i43987h
