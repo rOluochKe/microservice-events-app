@@ -1,5 +1,6 @@
 # docker build -t iamraymond/auth .
 
+minikube tunnel
 skaffold dev
 
 C:\Windows\System32\Drivers\etc\hosts
