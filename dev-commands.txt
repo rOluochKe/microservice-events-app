@@ -1,4 +1,5 @@
-# docker build -t iamraymond/auth .
+docker build -t iamraymond/auth .
+docker push iamraymond/auth
 
 minikube tunnel
 skaffold dev
