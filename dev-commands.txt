@@ -15,3 +15,4 @@ kubectl get services -n ingress-nginx
 kubectl port-forward nats-depl-647ff68878-xgnn9 4222:4222
 
 npm run publish
+npm install node-nats-streaming
