@@ -11,3 +11,7 @@ Creating a secret
 kubectl create secret generic jwt-secret --from-literal=JWT_KEY=eteti454oi6i4@!36i43987h
 
 kubectl get services -n ingress-nginx
+
+kubectl port-forward nats-depl-647ff68878-xgnn9 4222:4222
+
+npm run publish
