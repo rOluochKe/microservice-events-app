@@ -3,8 +3,13 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
 declare global {
-  var signin: () => string[];
+  namespace NodeJS {
+    interface Global {
+      signin(): string[];
+    }
+  }
 }
+
 jest.mock('../nats-wrapper');
 
 let mongo: any;
@@ -12,10 +17,13 @@ beforeAll(async () => {
   process.env.JWT_KEY = 'asdfasdf';
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-  const mongo = await MongoMemoryServer.create();
-  const mongoUri = mongo.getUri();
+  mongo = new MongoMemoryServer();
+  const mongoUri = await mongo.getUri();
 
-  await mongoose.connect(mongoUri, {});
+  await mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 });
 
 beforeEach(async () => {
@@ -28,9 +36,7 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  if (mongo) {
-    await mongo.stop();
-  }
+  await mongo.stop();
   await mongoose.connection.close();
 });
 
@@ -54,5 +60,5 @@ global.signin = () => {
   const base64 = Buffer.from(sessionJSON).toString('base64');
 
   // return a string thats the cookie with the encoded data
-  return [`session=${base64}`];
+  return [`express:sess=${base64}`];
 };
